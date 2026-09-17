@@ -23,8 +23,8 @@ For at least 4 of my 5 test questions, the retrieved chunks include one that
 contains the answer.
 
 **Why this target:**
-<!-- e.g. "One of my questions is about a topic only two documents mention, so
-     I expect that one to be hard." -->
+
+RAG systems are useless without good retrieval. Unless the retrieved chunks contain the answer, the system will not produce a useful result.
 
 ---
 
@@ -33,8 +33,8 @@ contains the answer.
 Every answer the system produces names at least one source document.
 
 **Why this target:**
-<!-- Why all five and not four? What about your setup makes that achievable —
-     or what would have to go wrong for it not to be? -->
+
+Naming the sources in the response provides traceability and credibility to the answers. The user can check the source to ensure that the answer is accurate and complete.
 
 ---
 
@@ -44,12 +44,11 @@ When I ask a question my documents clearly don't cover, the relevance gate
 stops it and the system returns "I don't have enough information about that" —
 in at least 4 of 5 tries.
 
-<!-- The five questions are the ones in `OUT_OF_SCOPE` at the bottom of
-     `questions.py`, and `run_eval.py` puts them through the gate and writes
-     what happened into your run log. Swap them for your own if you'd rather —
-     just keep five of them, or the "4 of 5" above has nothing to be 4 of. -->
 
 **Why this target:**
+
+A good RAG system refuses to answer questions that it cannot find a source for. Otherwise, the system can produce confidently incorrect answers that fool the user.
+
 <!-- What did your distances look like when you set the cutoff in Milestone 4?
      Was there a clean gap, or did the two groups overlap? -->
 
@@ -57,41 +56,25 @@ in at least 4 of 5 tries.
 
 ## 4. Something about your chunks
 
-<!-- YOU WRITE THIS ONE.
-
-     How would you know if your chunks were the right size? Name something
-     countable or observable.
-
-     Examples of the right shape — don't copy these, they should come from
-     what you actually saw in Milestone 3:
-       - "At least 4 of 5 sampled chunks read as a complete thought, with no
-          sentence cut in half at either end."
-       - "No chunk is shorter than 200 characters, since anything below that
-          in my corpus turned out to be a heading with no content under it." -->
-
+The chunks retrieved will be contain complete sections separated by markdown headings.
 
 
 **Why this target:**
 
+The markdown headings in the city guides act as natural thought and topic separations. Because of this, I think the best approach is to preserve that organization in the chunks. This is also similar to many of the documents I will be using to build RAG systems at work: formal documents with clear headings.
 
 
 ---
 
 ## 5. Your choice
 
-<!-- YOU WRITE THIS ONE TOO.
-
-     Pick something you actually care about getting right. It could be about
-     speed, about refusals, about a particular kind of question your corpus
-     handles badly, about source attribution being correct rather than merely
-     present — anything, as long as it names a number or an observable
-     outcome. -->
+The system will return the paragraph number from the source document along with the document name.
 
 
 
 **Why this target:**
 
-
+The longer documents in this corpus make it difficult to evaluate the answer at a glance. By retrieving the paragraph number as well (with each markdown heading being considered a paragraph), the user will be able to find the source text more easily.
 
 ---
 
